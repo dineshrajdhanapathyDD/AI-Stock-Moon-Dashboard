@@ -264,7 +264,7 @@ python generate_static_demo.py
 python setup_github_pages.py
 ```
 
-**Live Demo**: [View Static Demo](https://dineshrajdhanapathyDD.github.io/stock/) 📊
+
 
 ### **AWS Amplify Deployment**
 
