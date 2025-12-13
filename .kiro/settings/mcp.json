@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "stock-moon-dashboard": {
+      "command": "python",
+      "args": ["mcp_server.py"],
+      "env": {
+        "PYTHONPATH": "."
+      },
+      "disabled": false,
+      "autoApprove": ["getStockPrices", "getMoonPhase"]
+    }
+  }
+}
