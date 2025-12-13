@@ -4,18 +4,32 @@ services:
   stock-moon-dashboard:
     build: .
     ports:
-      - "8080:80"
+      - "8050:8050"
     environment:
-      - NODE_ENV=production
+      - DASH_DEBUG=False
+      - DASH_HOST=0.0.0.0
+      - PORT=8050
+      - DASH_COMPRESS=True
+      - DASH_SERVE_LOCALLY=False
+    volumes:
+      - ./logs:/app/logs
     restart: unless-stopped
-    
-  # Optional: Add dynamic suggestions service
-  suggestions:
-    build:
-      context: .
-      dockerfile: Dockerfile.suggestions
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8050/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Redis for caching
+  redis:
+    image: redis:7-alpine
     ports:
-      - "8081:5000"
-    environment:
-      - FLASK_ENV=production
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
     restart: unless-stopped
+    command: redis-server --appendonly yes
+
+volumes:
+  redis_data:
