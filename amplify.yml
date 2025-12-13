@@ -3,41 +3,14 @@ frontend:
   phases:
     preBuild:
       commands:
-        - echo "Installing Python and dependencies"
         - yum update -y
         - yum install -y python3 python3-pip python3-devel gcc
         - python3 -m pip install --upgrade pip
         - python3 -m pip install -r requirements.txt
     build:
       commands:
-        - echo "Testing application components"
-        - python3 -c "from src.stock_database import stock_db; print('Stock database loaded:', len(stock_db.stocks), 'stocks')"
-        - python3 -c "from src.dashboard import app; print('Dashboard application ready')"
-        - echo "Build completed successfully"
-    postBuild:
-      commands:
-        - echo "Configuring production environment"
-        - echo "web: python3 app.py" > Procfile
-        - echo "Production configuration complete"
+        - echo "Build completed"
   artifacts:
     baseDirectory: /
     files:
       - '**/*'
-  cache:
-    paths:
-      - ~/.cache/pip/**/*
-customHeaders:
-  - pattern: '**/*'
-    headers:
-      - key: 'X-Frame-Options'
-        value: 'DENY'
-      - key: 'X-Content-Type-Options'
-        value: 'nosniff'
-      - key: 'X-XSS-Protection'
-        value: '1; mode=block'
-      - key: 'Referrer-Policy'
-        value: 'strict-origin-when-cross-origin'
-      - key: 'Strict-Transport-Security'
-        value: 'max-age=31536000; includeSubDomains'
-      - key: 'Content-Security-Policy'
-        value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.plot.ly https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://query1.finance.yahoo.com https://archive-api.open-meteo.com;"

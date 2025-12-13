@@ -30,9 +30,17 @@ def check_prerequisites():
     else:
         issues.append("❌ requirements.txt not found")
     
-    # Check if amplify.yml exists
+    # Check if amplify.yml exists and validate YAML syntax
     if os.path.exists('amplify.yml'):
-        print("✅ amplify.yml configuration found")
+        try:
+            import yaml
+            with open('amplify.yml', 'r') as f:
+                yaml.safe_load(f)
+            print("✅ amplify.yml configuration found and valid")
+        except yaml.YAMLError as e:
+            issues.append(f"❌ amplify.yml has YAML syntax errors: {e}")
+        except ImportError:
+            print("✅ amplify.yml configuration found (YAML validation skipped)")
     else:
         issues.append("❌ amplify.yml not found")
     

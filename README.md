@@ -311,33 +311,25 @@ amplify publish
 
 #### **Custom Build Configuration**
 
-Create `amplify.yml` for Python/Dash deployment:
+The `amplify.yml` is already configured for Python/Dash deployment:
 
 ```yaml
 version: 1
-applications:
-  - frontend:
-      phases:
-        preBuild:
-          commands:
-            - echo "Installing Python dependencies"
-            - pip install --upgrade pip
-            - pip install -r requirements.txt
-        build:
-          commands:
-            - echo "Building Dash application"
-            - python -c "import src.dashboard; print('Dashboard build successful')"
-        postBuild:
-          commands:
-            - echo "Build completed successfully"
-      artifacts:
-        baseDirectory: /
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - ~/.cache/pip/**/*
-    appRoot: /
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yum update -y
+        - yum install -y python3 python3-pip python3-devel gcc
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install -r requirements.txt
+    build:
+      commands:
+        - echo "Build completed"
+  artifacts:
+    baseDirectory: /
+    files:
+      - '**/*'
 ```
 
 #### **Environment Variables**
