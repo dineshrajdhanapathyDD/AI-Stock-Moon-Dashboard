@@ -1,0 +1,12 @@
+{
+  "PYTHONPATH": "/opt/python:/opt/python/lib/python3.9/site-packages",
+  "PORT": "8050",
+  "DASH_DEBUG": "False",
+  "DASH_HOST": "0.0.0.0",
+  "DASH_COMPRESS": "True",
+  "DASH_SERVE_LOCALLY": "False",
+  "DASH_REQUESTS_PATHNAME_PREFIX": "/",
+  "CACHE_TTL": "3600",
+  "MAX_RETRIES": "3",
+  "LOG_LEVEL": "INFO"
+}

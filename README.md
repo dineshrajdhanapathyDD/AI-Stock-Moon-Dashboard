@@ -220,6 +220,8 @@ The application includes comprehensive error handling for:
 
 ### **One-Click Deploy**
 
+[![Deploy with Amplify Console](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/dineshrajdhanapathyDD/stock)
+
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
 [![Deploy to Railway](https://railway.app/button.svg)](https://railway.app/new)
@@ -249,7 +251,7 @@ python generate_static_demo.py
 python setup_github_pages.py
 ```
 
-**Live Demo**: [View Static Demo](https://yourusername.github.io/stock-moon-dashboard/) 📊
+**Live Demo**: [View Static Demo](https://dineshrajdhanapathyDD.github.io/stock/) 📊
 
 ### **AWS Amplify Deployment**
 

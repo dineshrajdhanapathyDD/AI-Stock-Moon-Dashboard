@@ -1,381 +1,282 @@
-# 🚀 Deployment Checklist - Stock Moon Dashboard
+# ✅ Deployment Checklist - Stock Moon Dashboard
 
-Complete pre-deployment checklist to ensure successful deployment across all platforms.
-
-## 📋 **Pre-Deployment Checklist**
-
-### **✅ Code Quality & Testing**
-
-- [ ] **All tests passing**
-  ```bash
-  python test_complete_system.py
-  python test_stock_search.py  
-  python test_autocomplete.py
-  ```
-
-- [ ] **Code linting and formatting**
-  ```bash
-  # Optional: Run code quality checks
-  flake8 src/ --max-line-length=100
-  black src/ --check
-  ```
-
-- [ ] **Dependencies up to date**
-  ```bash
-  pip list --outdated
-  pip install --upgrade -r requirements.txt
-  ```
-
-- [ ] **Security scan completed**
-  ```bash
-  # Optional: Security vulnerability scan
-  safety check -r requirements.txt
-  ```
-
-### **✅ Configuration & Environment**
-
-- [ ] **Environment variables configured**
-  - `DASH_DEBUG=False` (production)
-  - `DASH_HOST=0.0.0.0`
-  - `PORT=8050` (or platform-specific)
-  - `PYTHONPATH` set correctly
-
-- [ ] **Build script tested**
-  ```bash
-  python build.py
-  ```
-
-- [ ] **Production startup script tested**
-  ```bash
-  chmod +x start_production.sh
-  ./start_production.sh
-  ```
-
-- [ ] **Health check endpoints working**
-  ```bash
-  curl http://localhost:8050/health
-  curl http://localhost:8050/ready
-  ```
-
-### **✅ Performance & Optimization**
-
-- [ ] **Caching system tested**
-  - Stock data caching working
-  - Moon phase caching working
-  - Performance metrics showing good hit rates
-
-- [ ] **Memory usage optimized**
-  ```bash
-  # Monitor memory usage during testing
-  python -c "
-  import psutil
-  import os
-  process = psutil.Process(os.getpid())
-  print(f'Memory: {process.memory_info().rss / 1024 / 1024:.2f} MB')
-  "
-  ```
-
-- [ ] **Response times acceptable**
-  - Dashboard load time < 3 seconds
-  - Search autocomplete < 100ms
-  - Analysis completion < 10 seconds
-
-### **✅ Data & API Integration**
-
-- [ ] **MCP tools functioning**
-  ```bash
-  python mcp_server.py list
-  python mcp_server.py test-stock
-  python mcp_server.py test-moon
-  ```
-
-- [ ] **Stock database complete**
-  - 53+ stocks loaded
-  - All markets represented (US, India, Crypto)
-  - Search functionality working
-
-- [ ] **API endpoints accessible**
-  - Yahoo Finance API responding
-  - Moon phase calculations working
-  - Error handling for API failures
-
-### **✅ Security & Compliance**
-
-- [ ] **Security headers configured**
-  - X-Content-Type-Options: nosniff
-  - X-Frame-Options: DENY
-  - X-XSS-Protection: 1; mode=block
-  - Referrer-Policy: strict-origin-when-cross-origin
-
-- [ ] **Input validation implemented**
-  - Stock symbol validation
-  - Date range validation
-  - Parameter sanitization
-
-- [ ] **Rate limiting considered**
-  - API request throttling
-  - User input rate limiting
-  - Error handling for rate limits
+Use this checklist to ensure successful deployment of the Stock Moon Dashboard.
 
 ---
 
-## 🌐 **Platform-Specific Checklists**
+## 🚀 **Pre-Deployment Checklist**
 
-### **AWS Amplify Deployment**
+### **Repository Preparation**
+- [ ] All code committed to GitHub repository
+- [ ] Repository URL: `https://github.com/dineshrajdhanapathyDD/stock`
+- [ ] Main branch is up to date
+- [ ] All deployment files are present:
+  - [ ] `amplify.yml`
+  - [ ] `requirements.txt`
+  - [ ] `app.py`
+  - [ ] `Procfile`
+  - [ ] `runtime.txt`
+  - [ ] `render.yaml`
+  - [ ] `vercel.json`
 
-- [ ] **Amplify CLI configured**
+### **Local Validation**
+- [ ] Run deployment preparation script:
   ```bash
-  amplify --version
-  amplify status
+  python deploy_amplify.py
   ```
+- [ ] Verify all checks pass:
+  - [ ] Git repository detected ✅
+  - [ ] Requirements.txt found ✅
+  - [ ] Amplify.yml configuration found ✅
+  - [ ] App.py entry point found ✅
+  - [ ] All essential dependencies found ✅
+  - [ ] Application imports successfully ✅
+  - [ ] Stock database loads successfully ✅
 
-- [ ] **Build configuration ready**
-  - `amplify.yml` file present
-  - Environment variables set in console
-  - Custom domain configured (if needed)
-
-- [ ] **Deployment tested**
-  ```bash
-  amplify publish
-  amplify console
-  ```
-
-- [ ] **Post-deployment verification**
-  - Application accessible via Amplify URL
-  - All features working in production
-  - SSL certificate active
-  - Custom domain resolving (if configured)
-
-### **Heroku Deployment**
-
-- [ ] **Heroku files ready**
-  - `Procfile` present: `web: python app.py`
-  - `runtime.txt` present: `python-3.9.16`
-  - Environment variables configured
-
-- [ ] **Heroku CLI setup**
-  ```bash
-  heroku --version
-  heroku login
-  heroku apps
-  ```
-
-- [ ] **Deployment process**
-  ```bash
-  heroku create stock-moon-dashboard-prod
-  git push heroku main
-  heroku open
-  ```
-
-- [ ] **Post-deployment checks**
-  - Application logs clean: `heroku logs --tail`
-  - All dynos running: `heroku ps`
-  - Environment variables set: `heroku config`
-
-### **Docker Deployment**
-
-- [ ] **Docker files ready**
-  - `Dockerfile` optimized for production
-  - `docker-compose.yml` configured
-  - `.dockerignore` file present
-
-- [ ] **Docker build tested**
-  ```bash
-  docker build -t stock-moon-dashboard .
-  docker run -p 8050:8050 stock-moon-dashboard
-  ```
-
-- [ ] **Container health checks**
-  ```bash
-  docker ps
-  docker logs <container-id>
-  docker exec -it <container-id> /bin/bash
-  ```
-
-### **Railway Deployment**
-
-- [ ] **Railway CLI setup**
-  ```bash
-  railway --version
-  railway login
-  ```
-
-- [ ] **Deployment configuration**
-  ```bash
-  railway init
-  railway up
-  railway variables set DASH_DEBUG=False
-  ```
-
-- [ ] **Service verification**
-  ```bash
-  railway status
-  railway logs
-  railway open
-  ```
+### **Test Application Locally**
+- [ ] Install dependencies: `pip install -r requirements.txt`
+- [ ] Run application: `python app.py`
+- [ ] Test in browser: `http://localhost:8050`
+- [ ] Verify core functionality:
+  - [ ] Stock search works
+  - [ ] Data fetching works
+  - [ ] Charts render correctly
+  - [ ] No console errors
 
 ---
 
-## 🔍 **Post-Deployment Verification**
+## 🌐 **AWS Amplify Deployment**
 
-### **✅ Functional Testing**
+### **Step 1: Access Amplify Console**
+- [ ] Go to [AWS Amplify Console](https://console.aws.amazon.com/amplify/)
+- [ ] Sign in to your AWS account
+- [ ] Click "Get Started" under "Deploy"
 
-- [ ] **Core functionality**
-  - [ ] Stock search and autocomplete working
-  - [ ] Data fetching from APIs successful
-  - [ ] Statistical analysis completing
-  - [ ] Visualizations rendering correctly
-  - [ ] Interactive features responsive
+### **Step 2: Connect Repository**
+- [ ] Select "GitHub" as source provider
+- [ ] Authorize AWS Amplify to access GitHub
+- [ ] Select repository: `dineshrajdhanapathyDD/stock`
+- [ ] Select branch: `main`
+- [ ] Click "Next"
 
-- [ ] **Cross-browser testing**
-  - [ ] Chrome/Chromium
-  - [ ] Firefox
-  - [ ] Safari (if applicable)
-  - [ ] Edge
-  - [ ] Mobile browsers
+### **Step 3: Configure Build Settings**
+- [ ] App name: `stock-moon-dashboard`
+- [ ] Environment: `production`
+- [ ] Build settings should auto-detect from `amplify.yml`
+- [ ] Verify build configuration shows:
+  - [ ] Build command: Auto-detected
+  - [ ] Output directory: Auto-detected
+  - [ ] Node.js version: Not applicable (Python app)
 
-- [ ] **Performance testing**
-  - [ ] Page load times acceptable
-  - [ ] Memory usage stable
-  - [ ] No memory leaks detected
-  - [ ] API response times good
+### **Step 4: Set Environment Variables**
+Copy these variables from `amplify_env_vars.json`:
 
-### **✅ Error Handling**
+- [ ] `PYTHONPATH` = `/opt/python:/opt/python/lib/python3.9/site-packages`
+- [ ] `PORT` = `8050`
+- [ ] `DASH_DEBUG` = `False`
+- [ ] `DASH_HOST` = `0.0.0.0`
+- [ ] `DASH_COMPRESS` = `True`
+- [ ] `DASH_SERVE_LOCALLY` = `False`
+- [ ] `DASH_REQUESTS_PATHNAME_PREFIX` = `/`
+- [ ] `CACHE_TTL` = `3600`
+- [ ] `MAX_RETRIES` = `3`
+- [ ] `LOG_LEVEL` = `INFO`
 
-- [ ] **Invalid inputs handled gracefully**
-  - [ ] Invalid stock symbols
-  - [ ] Invalid date ranges
-  - [ ] Network failures
-  - [ ] API timeouts
+### **Step 5: Deploy**
+- [ ] Review all settings
+- [ ] Click "Save and Deploy"
+- [ ] Monitor build progress (typically 5-10 minutes)
 
-- [ ] **Error messages user-friendly**
-  - [ ] Clear error descriptions
-  - [ ] Helpful suggestions provided
-  - [ ] No technical stack traces visible
-
-### **✅ Monitoring & Logging**
-
-- [ ] **Application logs configured**
-  - [ ] Log level appropriate for production
-  - [ ] Sensitive data not logged
-  - [ ] Performance metrics captured
-
-- [ ] **Health monitoring setup**
-  - [ ] Health check endpoints responding
-  - [ ] Uptime monitoring configured
-  - [ ] Alert thresholds set
-
----
-
-## 📊 **Performance Benchmarks**
-
-### **Target Performance Metrics**
-
-| Metric | Target | Acceptable | Action Required |
-|--------|--------|------------|-----------------|
-| **Page Load Time** | < 2s | < 5s | > 5s |
-| **Search Response** | < 100ms | < 300ms | > 300ms |
-| **Analysis Time** | < 5s | < 15s | > 15s |
-| **Memory Usage** | < 256MB | < 512MB | > 512MB |
-| **API Response** | < 1s | < 3s | > 3s |
-
-### **Load Testing Results**
-
-- [ ] **Concurrent users tested**
-  - [ ] 10 concurrent users
-  - [ ] 50 concurrent users  
-  - [ ] 100 concurrent users (if expected)
-
-- [ ] **Stress testing completed**
-  - [ ] Peak load handling
-  - [ ] Graceful degradation
-  - [ ] Recovery after load
+### **Step 6: Verify Deployment**
+- [ ] Build completes successfully
+- [ ] No errors in build logs
+- [ ] Application URL is generated
+- [ ] Test live application:
+  - [ ] Application loads
+  - [ ] Stock search works
+  - [ ] Data fetching works
+  - [ ] Charts render
+  - [ ] Health check works: `[app-url]/health`
 
 ---
 
-## 🚨 **Rollback Plan**
+## 📄 **GitHub Pages Deployment**
 
-### **Rollback Triggers**
+### **Automatic Deployment**
+- [ ] Push to main branch triggers GitHub Actions
+- [ ] Check Actions tab in GitHub repository
+- [ ] Verify workflow completes successfully
+- [ ] Static demo available at: `https://dineshrajdhanapathyDD.github.io/stock/`
 
-- [ ] **Critical errors identified**
-  - Application not starting
-  - Data corruption detected
-  - Security vulnerabilities found
-  - Performance degradation > 50%
-
-### **Rollback Procedures**
-
-**AWS Amplify:**
-```bash
-# Rollback to previous deployment
-amplify console
-# Use Amplify Console to rollback to previous version
-```
-
-**Heroku:**
-```bash
-# Rollback to previous release
-heroku releases
-heroku rollback v<previous-version>
-```
-
-**Docker:**
-```bash
-# Rollback to previous image
-docker pull stock-moon-dashboard:previous
-docker stop current-container
-docker run -d stock-moon-dashboard:previous
-```
+### **Manual Deployment**
+- [ ] Run: `python generate_static_demo.py`
+- [ ] Run: `python setup_github_pages.py`
+- [ ] Commit and push generated files
+- [ ] Enable GitHub Pages in repository settings
 
 ---
 
-## 📞 **Support Contacts**
+## 🔧 **Alternative Platform Deployments**
 
-### **Deployment Issues**
-- **Technical Lead**: [Your contact information]
-- **DevOps Team**: [Team contact information]
-- **Platform Support**: 
-  - AWS Amplify: [AWS Support]
-  - Heroku: [Heroku Support]
-  - Railway: [Railway Support]
+### **Render.com**
+- [ ] Connect GitHub repository
+- [ ] Select `render.yaml` configuration
+- [ ] Set environment variables
+- [ ] Deploy and test
 
-### **Emergency Contacts**
-- **On-call Engineer**: [Emergency contact]
-- **Product Owner**: [Product contact]
-- **Infrastructure Team**: [Infrastructure contact]
+### **Railway**
+- [ ] Connect GitHub repository
+- [ ] Auto-detect Python application
+- [ ] Set environment variables
+- [ ] Deploy and test
 
----
+### **Heroku**
+- [ ] Create new Heroku app
+- [ ] Connect GitHub repository
+- [ ] Verify `Procfile` and `runtime.txt`
+- [ ] Set environment variables
+- [ ] Deploy and test
 
-## ✅ **Final Deployment Sign-off**
-
-**Deployment Information:**
-- **Date**: _______________
-- **Platform**: _______________
-- **Version**: _______________
-- **Deployed by**: _______________
-
-**Sign-off Checklist:**
-- [ ] All checklist items completed
-- [ ] Performance benchmarks met
-- [ ] Security requirements satisfied
-- [ ] Monitoring and alerting configured
-- [ ] Documentation updated
-- [ ] Team notified of deployment
-
-**Signatures:**
-- **Technical Lead**: _______________
-- **Product Owner**: _______________
-- **DevOps Engineer**: _______________
+### **Vercel**
+- [ ] Connect GitHub repository
+- [ ] Configure for Python deployment
+- [ ] Set environment variables
+- [ ] Deploy and test
 
 ---
 
-**Deployment Status: [ ] APPROVED [ ] REJECTED [ ] NEEDS REVIEW**
+## 🔍 **Post-Deployment Validation**
 
-**Notes:**
-_________________________________________________
-_________________________________________________
-_________________________________________________
+### **Functional Testing**
+- [ ] Application loads without errors
+- [ ] Stock search autocomplete works
+- [ ] Sample stock analysis completes:
+  - [ ] Try: AAPL (Apple)
+  - [ ] Try: GOOGL (Google)
+  - [ ] Try: RELIANCE.NS (Indian stock)
+- [ ] Charts render correctly:
+  - [ ] Time series plots
+  - [ ] Scatter plots
+  - [ ] Bar charts
+  - [ ] Calendar heatmaps
+- [ ] Statistical analysis works:
+  - [ ] Correlations calculated
+  - [ ] Volatility analysis
+  - [ ] Significance tests
+
+### **Performance Testing**
+- [ ] Page load time < 5 seconds
+- [ ] Data fetching completes < 10 seconds
+- [ ] Charts render smoothly
+- [ ] No memory leaks or errors
+- [ ] Mobile responsiveness works
+
+### **Security Testing**
+- [ ] HTTPS enabled (production)
+- [ ] Security headers present:
+  - [ ] X-Frame-Options
+  - [ ] X-Content-Type-Options
+  - [ ] X-XSS-Protection
+  - [ ] Content-Security-Policy
+- [ ] No sensitive data exposed
+- [ ] API keys not visible in client
+
+### **Health Checks**
+- [ ] `/health` endpoint responds
+- [ ] `/ready` endpoint responds
+- [ ] Application logs show no errors
+- [ ] Monitoring dashboards (if configured)
 
 ---
 
-**This checklist ensures a smooth, secure, and successful deployment of the Stock Moon Dashboard across all supported platforms.** 🚀✅
+## 🚨 **Troubleshooting Common Issues**
+
+### **Build Failures**
+- [ ] Check Python version compatibility
+- [ ] Verify all dependencies in requirements.txt
+- [ ] Check for import errors in logs
+- [ ] Validate amplify.yml syntax
+
+### **Runtime Errors**
+- [ ] Check environment variables are set
+- [ ] Verify port configuration
+- [ ] Check application logs
+- [ ] Test locally with same environment
+
+### **Performance Issues**
+- [ ] Enable compression
+- [ ] Check CDN configuration
+- [ ] Optimize caching settings
+- [ ] Monitor resource usage
+
+### **Data Fetching Issues**
+- [ ] Verify API endpoints are accessible
+- [ ] Check rate limiting
+- [ ] Validate stock symbols
+- [ ] Test with different date ranges
+
+---
+
+## 📊 **Success Metrics**
+
+### **Deployment Success**
+- [ ] Build time < 10 minutes
+- [ ] Zero build errors
+- [ ] Application starts successfully
+- [ ] All health checks pass
+
+### **Application Performance**
+- [ ] Page load < 5 seconds
+- [ ] Data fetch < 10 seconds
+- [ ] Chart render < 3 seconds
+- [ ] Search response < 1 second
+
+### **User Experience**
+- [ ] Intuitive stock search
+- [ ] Clear visualizations
+- [ ] Responsive design
+- [ ] Error handling works
+
+---
+
+## 🎯 **Final Verification**
+
+### **End-to-End Test**
+1. [ ] Open deployed application
+2. [ ] Search for "Apple" or "AAPL"
+3. [ ] Select date range (last 3 months)
+4. [ ] Click "Analyze Stock vs Moon Phases"
+5. [ ] Verify all charts load
+6. [ ] Check statistical results
+7. [ ] Test with Indian stock (e.g., "TCS.NS")
+8. [ ] Verify mobile responsiveness
+
+### **Documentation Check**
+- [ ] README.md has correct deployment URLs
+- [ ] All deployment guides are accurate
+- [ ] Environment variables documented
+- [ ] Troubleshooting guides complete
+
+---
+
+## 🎉 **Deployment Complete!**
+
+Once all items are checked:
+
+✅ **Your Stock Moon Dashboard is successfully deployed!**
+
+**Live URLs**:
+- **AWS Amplify**: `https://[app-id].amplifyapp.com`
+- **GitHub Pages**: `https://dineshrajdhanapathyDD.github.io/stock/`
+- **Custom Domain**: Configure in platform settings
+
+**Next Steps**:
+- [ ] Share application URL
+- [ ] Monitor usage and performance
+- [ ] Plan future enhancements
+- [ ] Set up monitoring alerts
+- [ ] Configure backup strategies
+
+---
+
+**🚀 Congratulations! Your Stock Moon Dashboard is now live and ready for users!**
