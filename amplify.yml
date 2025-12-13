@@ -1,96 +1,43 @@
 version: 1
-applications:
-  - backend:
-      phases:
-        preBuild:
-          commands:
-            - echo "=== AWS Amplify Pre-Build Phase ==="
-            - echo "Installing Python and system dependencies"
-            - yum update -y
-            - yum install -y python3 python3-pip python3-devel gcc
-            - echo "Setting up Python environment"
-            - python3 -m pip install --upgrade pip setuptools wheel
-            - echo "Installing application dependencies"
-            - python3 -m pip install -r requirements.txt --no-cache-dir
-            - echo "Verifying Python installation"
-            - python3 --version
-            - pip3 --version
-            - echo "Python environment ready"
-        build:
-          commands:
-            - echo "=== AWS Amplify Build Phase ==="
-            - echo "Running application tests"
-            - python3 -c "import sys; print('Python path:', sys.path)"
-            - echo "Testing core components"
-            - python3 -c "from src.stock_database import stock_db; print('Stock database loaded:', len(stock_db.stocks), 'stocks')"
-            - python3 -c "from src.dashboard import app; print('Dashboard application ready')"
-            - echo "Running system validation"
-            - python3 test_complete_system.py
-            - echo "Build validation complete"
-        postBuild:
-          commands:
-            - echo "=== AWS Amplify Post-Build Phase ==="
-            - echo "Configuring production environment"
-            - echo "Creating Amplify startup configuration"
-            - cat > amplify_start.sh << 'EOF'
-            - '#!/bin/bash'
-            - 'export PYTHONPATH=/opt/python:/opt/python/lib/python3.9/site-packages:$PYTHONPATH'
-            - 'export DASH_DEBUG=False'
-            - 'export DASH_HOST=0.0.0.0'
-            - 'export PORT=${PORT:-8050}'
-            - 'export DASH_COMPRESS=True'
-            - 'export DASH_SERVE_LOCALLY=False'
-            - 'echo "Starting Stock Moon Dashboard on Amplify..."'
-            - 'echo "Dashboard will be available at: http://$DASH_HOST:$PORT"'
-            - 'cd /opt/python'
-            - 'python3 app.py'
-            - 'EOF'
-            - chmod +x amplify_start.sh
-            - echo "Production configuration complete"
-      artifacts:
-        baseDirectory: /
-        files:
-          - '**/*'
-        name: stock-moon-dashboard-backend
-      cache:
-        paths:
-          - ~/.cache/pip/**/*
-          - /opt/python/**/*
-    appRoot: /
-  - frontend:
-      phases:
-        preBuild:
-          commands:
-            - echo "=== Frontend Static Assets Phase ==="
-            - echo "Generating static demo for Amplify hosting"
-            - python3 generate_static_demo.py
-            - echo "Creating Amplify-compatible frontend structure"
-            - mkdir -p dist
-            - if [ -d "static-demo" ]; then cp -r static-demo/* dist/; fi
-            - echo "Frontend assets prepared"
-        build:
-          commands:
-            - echo "=== Frontend Build Phase ==="
-            - echo "Optimizing static assets"
-            - ls -la dist/
-            - echo "Frontend build complete"
-      artifacts:
-        baseDirectory: dist
-        files:
-          - '**/*'
-        name: stock-moon-dashboard-frontend
-    customHeaders:
-      - pattern: '**/*'
-        headers:
-          - key: 'X-Frame-Options'
-            value: 'DENY'
-          - key: 'X-Content-Type-Options'
-            value: 'nosniff'
-          - key: 'X-XSS-Protection'
-            value: '1; mode=block'
-          - key: 'Referrer-Policy'
-            value: 'strict-origin-when-cross-origin'
-          - key: 'Strict-Transport-Security'
-            value: 'max-age=31536000; includeSubDomains'
-          - key: 'Content-Security-Policy'
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.plot.ly https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://query1.finance.yahoo.com https://archive-api.open-meteo.com;"
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Installing Python and dependencies"
+        - yum update -y
+        - yum install -y python3 python3-pip python3-devel gcc
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install -r requirements.txt
+    build:
+      commands:
+        - echo "Testing application components"
+        - python3 -c "from src.stock_database import stock_db; print('Stock database loaded:', len(stock_db.stocks), 'stocks')"
+        - python3 -c "from src.dashboard import app; print('Dashboard application ready')"
+        - echo "Build completed successfully"
+    postBuild:
+      commands:
+        - echo "Configuring production environment"
+        - echo "web: python3 app.py" > Procfile
+        - echo "Production configuration complete"
+  artifacts:
+    baseDirectory: /
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - ~/.cache/pip/**/*
+customHeaders:
+  - pattern: '**/*'
+    headers:
+      - key: 'X-Frame-Options'
+        value: 'DENY'
+      - key: 'X-Content-Type-Options'
+        value: 'nosniff'
+      - key: 'X-XSS-Protection'
+        value: '1; mode=block'
+      - key: 'Referrer-Policy'
+        value: 'strict-origin-when-cross-origin'
+      - key: 'Strict-Transport-Security'
+        value: 'max-age=31536000; includeSubDomains'
+      - key: 'Content-Security-Policy'
+        value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.plot.ly https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://query1.finance.yahoo.com https://archive-api.open-meteo.com;"
