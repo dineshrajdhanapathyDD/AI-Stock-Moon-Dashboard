@@ -1,25 +1,13 @@
 version: 1
 frontend:
   phases:
-    preBuild:
-      commands:
-        - echo "Installing Python dependencies"
-        - python3 -m pip install --user --upgrade pip
-        - python3 -m pip install --user -r requirements.txt
     build:
       commands:
-        - echo "Generating static demo"
-        - python3 deployment/github-pages/generate_static_demo.py
-        - echo "Static demo generated"
-    postBuild:
-      commands:
-        - echo "Preparing static files"
-        - cp -r static-demo/* ./
-        - echo "Static files ready"
+        - echo "Preparing static landing page"
+        - ls -la
+        - echo "Build completed successfully"
   artifacts:
     baseDirectory: /
     files:
-      - '**/*'
-  cache:
-    paths:
-      - ~/.cache/pip/**/*
+      - index.html
+      - README.md
