@@ -1,0 +1,30 @@
+{
+  "AAPL": {
+    "metrics": [],
+    "analysis": {
+      "correlations": {},
+      "phase_analysis": {}
+    }
+  },
+  "GOOGL": {
+    "metrics": [],
+    "analysis": {
+      "correlations": {},
+      "phase_analysis": {}
+    }
+  },
+  "MSFT": {
+    "metrics": [],
+    "analysis": {
+      "correlations": {},
+      "phase_analysis": {}
+    }
+  },
+  "RELIANCE.NS": {
+    "metrics": [],
+    "analysis": {
+      "correlations": {},
+      "phase_analysis": {}
+    }
+  }
+}

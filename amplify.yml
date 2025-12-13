@@ -1,13 +1,31 @@
 version: 1
 frontend:
   phases:
+    preBuild:
+      commands:
+        - echo "Installing Python dependencies for build-time generation"
+        - python3 -m pip install --user --upgrade pip
+        - python3 -m pip install --user -r requirements.txt
+        - export PATH=$PATH:/root/.local/bin
     build:
       commands:
-        - echo "Preparing static landing page"
-        - ls -la
-        - echo "Build completed successfully"
+        - echo "Building static dashboard with Python"
+        - python3 build_static_dashboard.py
+        - echo "Static dashboard generated successfully"
+        - ls -la *.html *.json
+    postBuild:
+      commands:
+        - echo "Static files ready for deployment"
+        - echo "Dashboard will be available at the Amplify URL"
   artifacts:
     baseDirectory: /
     files:
       - index.html
-      - README.md
+      - data.json
+      - '**/*.css'
+      - '**/*.js'
+      - '**/*.png'
+      - '**/*.jpg'
+  cache:
+    paths:
+      - ~/.cache/pip/**/*
