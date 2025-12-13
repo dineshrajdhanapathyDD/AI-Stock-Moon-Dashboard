@@ -148,13 +148,23 @@ def create_static_html(metrics_data, analysis_results):
     html_content += """
     <div class="mt-5 p-4 bg-light rounded">
         <h5>🚀 Want the Full Interactive Version?</h5>
-        <p>This is a static demo. For the full interactive dashboard with real-time data:</p>
-        <a href="https://github.com/yourusername/stock-moon-dashboard" class="btn btn-primary">
-            View on GitHub
-        </a>
-        <a href="#" class="btn btn-success">
-            Live Demo
-        </a>
+        <p>This is a static demo with sample data. For the full interactive dashboard with real-time data and all features:</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="https://github.com/yourusername/stock-moon-dashboard" class="btn btn-primary">
+                📂 View on GitHub
+            </a>
+            <a href="https://render.com/deploy" class="btn btn-success">
+                🚀 Deploy Live Version
+            </a>
+            <a href="https://railway.app/new" class="btn btn-info">
+                🚄 Deploy on Railway
+            </a>
+        </div>
+        <div class="mt-3">
+            <small class="text-muted">
+                💡 The full version includes real-time data, multiple stocks, custom date ranges, and advanced analytics.
+            </small>
+        </div>
     </div>
     
     </div>

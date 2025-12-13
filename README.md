@@ -240,11 +240,16 @@ python app.py
 ### **GitHub Pages Static Demo**
 
 ```bash
-# Generate static demo for GitHub Pages
+# Automatic deployment via GitHub Actions
+git push origin main
+# Demo will be available at: https://yourusername.github.io/stock-moon-dashboard/
+
+# Or generate manually
 python generate_static_demo.py
-# Enable GitHub Pages in repository settings
-# Select 'static-demo' folder as source
+python setup_github_pages.py
 ```
+
+**Live Demo**: [View Static Demo](https://yourusername.github.io/stock-moon-dashboard/) 📊
 
 ### **AWS Amplify Deployment**
 
