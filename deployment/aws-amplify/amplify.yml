@@ -1,0 +1,40 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Installing Python and dependencies"
+        - python3 -m pip install --user --upgrade pip
+        - python3 -m pip install --user -r requirements.txt
+        - echo "Dependencies installed successfully"
+    build:
+      commands:
+        - echo "Generating static demo for Amplify hosting"
+        - python3 generate_static_demo.py
+        - echo "Static demo generated successfully"
+    postBuild:
+      commands:
+        - echo "Configuring static hosting"
+        - ls -la static-demo/
+        - cp -r static-demo/* ./
+        - echo "Static files ready for hosting"
+  artifacts:
+    baseDirectory: /
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - ~/.cache/pip/**/*
+customHeaders:
+  - pattern: '**/*'
+    headers:
+      - key: 'X-Frame-Options'
+        value: 'DENY'
+      - key: 'X-Content-Type-Options'
+        value: 'nosniff'
+      - key: 'X-XSS-Protection'
+        value: '1; mode=block'
+      - key: 'Referrer-Policy'
+        value: 'strict-origin-when-cross-origin'
+      - key: 'Strict-Transport-Security'
+        value: 'max-age=31536000; includeSubDomains'

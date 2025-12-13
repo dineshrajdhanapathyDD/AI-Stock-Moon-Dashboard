@@ -185,13 +185,24 @@ The dashboard analyzes 8 moon phases:
 ├── app.py                 # Main application entry point
 ├── requirements.txt       # Python dependencies
 ├── mcp_server.py         # MCP tools server
-├── README.md             # This file
-└── src/
-    ├── __init__.py       # Package initialization
-    ├── data_models.py    # Data structures and models
-    ├── mcp_tools.py      # MCP tools for data fetching
-    └── dashboard.py      # Main Dash application
+├── index.html            # Landing page
+├── amplify.yml           # Current deployment config
+├── src/                  # Source code
+│   ├── dashboard.py      # Main Dash application
+│   ├── mcp_tools.py      # MCP data fetching tools
+│   ├── statistical_analyzer.py # Analysis engine
+│   └── [8 more modules]  # Complete application
+├── deployment/           # Platform configurations
+│   ├── aws-amplify/      # AWS Amplify setup
+│   ├── render/           # Render.com config
+│   ├── heroku/           # Heroku config
+│   └── [4 more platforms] # All deployment options
+├── docs/                 # Documentation
+├── tests/                # Test suite
+└── README.md             # This file
 ```
+
+See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for complete details.
 
 ## 🌐 API Endpoints Used
 
@@ -227,6 +238,8 @@ The application includes comprehensive error handling for:
 [![Deploy to Railway](https://railway.app/button.svg)](https://railway.app/new)
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+**📁 All deployment configurations are in the [`deployment/`](deployment/) directory**
 
 ### **Local Development**
 
