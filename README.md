@@ -218,6 +218,14 @@ The application includes comprehensive error handling for:
 
 ## 🚀 Deployment Options
 
+### **One-Click Deploy**
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
+[![Deploy to Railway](https://railway.app/button.svg)](https://railway.app/new)
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ### **Local Development**
 
 ```bash
@@ -227,6 +235,15 @@ cd stock-moon-dashboard
 pip install -r requirements.txt
 python app.py
 # Access at http://localhost:8050
+```
+
+### **GitHub Pages Static Demo**
+
+```bash
+# Generate static demo for GitHub Pages
+python generate_static_demo.py
+# Enable GitHub Pages in repository settings
+# Select 'static-demo' folder as source
 ```
 
 ### **AWS Amplify Deployment**
