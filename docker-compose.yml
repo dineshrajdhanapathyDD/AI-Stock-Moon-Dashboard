@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  stock-moon-dashboard:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    
+  # Optional: Add dynamic suggestions service
+  suggestions:
+    build:
+      context: .
+      dockerfile: Dockerfile.suggestions
+    ports:
+      - "8081:5000"
+    environment:
+      - FLASK_ENV=production
+    restart: unless-stopped
