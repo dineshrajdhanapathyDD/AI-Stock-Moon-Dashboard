@@ -8,6 +8,7 @@ import sys
 import os
 import logging
 from datetime import datetime
+from flask import request
 
 # Add src directory to Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
@@ -93,10 +94,22 @@ def add_health_check(app):
                 'status': 'ready',
                 'timestamp': datetime.now().isoformat(),
                 'stocks_loaded': stock_count,
-                'components': ['dashboard', 'mcp_tools', 'statistical_analyzer']
+                'components': ['dashboard', 'mcp_tools', 'statistical_analyzer', 'suggestions_api']
             }
         except Exception as e:
             return {'status': 'not_ready', 'error': str(e)}, 503
+    
+    @app.server.route('/api/suggestions')
+    def stock_suggestions():
+        query = request.args.get('q', '')
+        limit = int(request.args.get('limit', 10))
+        
+        try:
+            from src.suggestions_api import suggestions_api
+            suggestions = suggestions_api.get_suggestions(query, limit)
+            return {'suggestions': suggestions}
+        except Exception as e:
+            return {'error': str(e)}, 500
     
     return app
 
@@ -105,6 +118,7 @@ def main():
     try:
         # Import dashboard after path setup
         from src.dashboard import app
+        from src.suggestions_api import suggestions_api
         
         # Get configuration
         config = get_config()

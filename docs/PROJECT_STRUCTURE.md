@@ -1,113 +1,160 @@
 # 📁 Project Structure
 
-## Overview
-Stock Moon Dashboard - A Python/Dash application analyzing relationships between stock prices and moon phases.
+## 🏗️ **Clean Architecture**
 
 ```
 stock-moon-dashboard/
-├── 📄 README.md                    # Main project documentation
-├── 📄 LICENSE                      # MIT License
-├── 📄 requirements.txt             # Python dependencies
-├── 📄 app.py                       # Main application entry point
-├── 📄 mcp_server.py                # MCP tools server
-├── 📄 amplify.yml                  # AWS Amplify deployment config
-├── 📄 build.py                     # Build and validation script
-├── 📄 .gitignore                   # Git ignore rules
-├── 📄 CONTRIBUTING.md              # Contribution guidelines
-├── 📄 PROJECT_STRUCTURE.md         # This file
-├── 📄 DEPLOYMENT_STATUS.md         # Deployment readiness status
-├── 📄 DEPLOYMENT.md                # Comprehensive deployment guide
-├── 📄 DEPLOYMENT_CHECKLIST.md     # Deployment checklist
-├── 📄 INDIAN_STOCKS_GUIDE.md      # Indian market integration guide
-├── 📄 STOCK_SEARCH_FEATURES.md    # Search functionality guide
+├── 📱 Core Application
+│   ├── app.py                    # Main application entry point
+│   ├── mcp_server.py            # MCP tools server
+│   ├── requirements.txt         # Python dependencies
+│   └── src/                     # Source code
+│       ├── __init__.py
+│       ├── dashboard.py         # Main Dash application
+│       ├── data_models.py       # Data structures
+│       ├── mcp_tools.py         # MCP data fetching
+│       ├── data_alignment.py    # Data processing
+│       ├── metrics_calculator.py # Metrics computation
+│       ├── statistical_analyzer.py # Statistical analysis
+│       ├── visualizations.py    # Chart generation
+│       ├── cache_manager.py     # Caching system
+│       ├── data_validation.py   # Input validation
+│       └── stock_database.py    # Stock database
 │
-├── 📁 src/                         # Core application source code
-│   ├── 📄 __init__.py             # Package initialization
-│   ├── 📄 dashboard.py            # Main Dash web application
-│   ├── 📄 mcp_tools.py            # MCP data fetching tools
-│   ├── 📄 stock_database.py       # Stock search and autocomplete
-│   ├── 📄 data_models.py          # Data structures and models
-│   ├── 📄 data_alignment.py       # Data synchronization utilities
-│   ├── 📄 data_validation.py      # Input validation and sanitization
-│   ├── 📄 metrics_calculator.py   # Financial metrics computation
-│   ├── 📄 statistical_analyzer.py # Statistical analysis engine
-│   ├── 📄 visualizations.py       # Chart and graph generation
-│   └── 📄 cache_manager.py        # Caching and performance optimization
+├── 🚀 Deployment Configurations
+│   └── deployment/
+│       ├── aws-amplify/         # AWS Amplify files
+│       ├── render/              # Render.com config
+│       ├── heroku/              # Heroku config
+│       ├── vercel/              # Vercel config
+│       ├── railway/             # Railway config
+│       └── github-pages/        # Static demo
 │
-├── 📁 .kiro/                      # Kiro IDE configuration
-│   ├── 📁 specs/                  # Feature specifications
-│   │   └── 📁 stock-moon-dashboard/
-│   │       ├── 📄 requirements.md # Feature requirements (EARS format)
-│   │       ├── 📄 design.md       # Technical design document
-│   │       └── 📄 tasks.md        # Implementation task list
-│   └── 📁 settings/               # IDE settings
-│       └── 📄 mcp.json            # MCP server configuration
+├── 📚 Documentation
+│   └── docs/
+│       ├── DEPLOYMENT_*.md      # Deployment guides
+│       ├── INDIAN_STOCKS_GUIDE.md
+│       ├── STOCK_SEARCH_FEATURES.md
+│       └── CONTRIBUTING.md
 │
-├── 📁 .test_cache/                # Test result caching
+├── 🧪 Testing
+│   └── tests/
+│       ├── test_*.py           # All test files
+│       └── test_complete_system.py
 │
-└── 📄 test_*.py                   # Test suite files
-    ├── 📄 test_complete_system.py # End-to-end system tests
-    ├── 📄 test_stock_search.py    # Stock database tests
-    ├── 📄 test_autocomplete.py    # Autocomplete functionality tests
-    ├── 📄 test_indian_stocks.py   # Indian market integration tests
-    ├── 📄 test_alignment.py       # Data alignment tests
-    ├── 📄 test_caching.py         # Cache performance tests
-    ├── 📄 test_metrics.py         # Metrics calculation tests
-    ├── 📄 test_statistics.py      # Statistical analysis tests
-    └── 📄 test_visualizations.py  # Visualization generation tests
+├── 🌐 Web Assets
+│   ├── index.html              # Landing page
+│   └── amplify.yml             # Current deployment config
+│
+└── 📋 Project Files
+    ├── README.md               # Main documentation
+    ├── .gitignore             # Git ignore rules
+    └── .github/               # GitHub workflows
+        └── workflows/
+            ├── deploy.yml      # Deployment workflow
+            └── pages.yml       # Pages workflow
 ```
 
-## Key Components
+## 🎯 **Key Components**
 
-### 🚀 **Application Layer**
-- `app.py` - Production-ready entry point with health checks
-- `src/dashboard.py` - Interactive Dash web interface
-- `src/mcp_tools.py` - External API integration (Yahoo Finance, Moon data)
+### **Core Application**
+- **`app.py`**: Production-ready entry point with health checks
+- **`src/dashboard.py`**: Interactive Dash web application
+- **`src/mcp_tools.py`**: Yahoo Finance + Moon Phase APIs
+- **`src/statistical_analyzer.py`**: Correlation and volatility analysis
 
-### 📊 **Data Processing**
-- `src/data_models.py` - Type-safe data structures
-- `src/data_alignment.py` - Timestamp synchronization
-- `src/metrics_calculator.py` - Financial calculations
-- `src/statistical_analyzer.py` - Correlation analysis
+### **Deployment Ready**
+- **AWS Amplify**: Global CDN with auto-scaling
+- **Render.com**: Container deployment with free tier
+- **Heroku**: Traditional PaaS deployment
+- **Vercel**: Serverless deployment
+- **GitHub Pages**: Static demo version
 
-### 🔍 **Search & Discovery**
-- `src/stock_database.py` - 53+ stocks with intelligent search
-- Autocomplete with fuzzy matching and relevance scoring
-- Multi-market support (US, India, Crypto)
+### **Testing Suite**
+- **Unit Tests**: Component-level testing
+- **Integration Tests**: End-to-end workflows
+- **System Tests**: Complete application validation
+- **Indian Market Tests**: NSE/BSE specific testing
 
-### 📈 **Visualization**
-- `src/visualizations.py` - Interactive Plotly charts
-- Time series, scatter plots, bar charts, calendar heatmaps
-- Real-time updates and responsive design
+### **Documentation**
+- **Deployment Guides**: Platform-specific instructions
+- **Feature Guides**: Detailed functionality documentation
+- **API Documentation**: MCP tools and data models
+- **Contributing Guide**: Development setup and guidelines
 
-### ⚡ **Performance**
-- `src/cache_manager.py` - Intelligent caching with TTL
-- Sub-second autocomplete responses
-- Optimized data structures and algorithms
+## 🔧 **Development Workflow**
 
-### 🧪 **Testing**
-- Comprehensive test suite with 100% core functionality coverage
-- Property-based testing for statistical correctness
-- Integration tests for end-to-end workflows
+### **Local Development**
+```bash
+# Setup
+git clone <repository>
+cd stock-moon-dashboard
+pip install -r requirements.txt
 
-### 🚀 **Deployment**
-- AWS Amplify ready with `amplify.yml`
-- Docker, Heroku, Railway configurations
-- Production optimizations and security headers
+# Run application
+python app.py
+# Access at http://localhost:8050
 
-## Development Workflow
+# Run tests
+python -m pytest tests/
+```
 
-1. **Setup**: `pip install -r requirements.txt`
-2. **Run**: `python app.py`
-3. **Test**: `python test_complete_system.py`
-4. **Build**: `python build.py`
-5. **Deploy**: Follow `DEPLOYMENT.md` guide
+### **Deployment**
+```bash
+# Choose platform and copy config
+cp deployment/render/render.yaml ./
+# or
+cp deployment/aws-amplify/amplify.yml ./
 
-## Architecture Highlights
+# Deploy via platform-specific method
+```
 
-- **MCP Integration**: Model Context Protocol for data fetching
-- **Modular Design**: Loosely coupled components
-- **Type Safety**: Comprehensive data validation
-- **Performance**: Intelligent caching and optimization
-- **Scalability**: Production-ready with health monitoring
-- **Multi-Market**: Global stock market support
+## 📊 **Features Overview**
+
+### **Data Sources**
+- **Yahoo Finance**: Real-time stock data (US, India, Crypto)
+- **Open-Meteo**: Astronomical moon phase calculations
+- **MCP Protocol**: Standardized data fetching
+
+### **Analysis Capabilities**
+- **Statistical Correlations**: Pearson, Spearman
+- **Volatility Analysis**: Rolling standard deviation
+- **Moon Phase Mapping**: 8 distinct lunar phases
+- **Significance Testing**: P-values and effect sizes
+
+### **Visualization Types**
+- **Time Series**: Stock prices + moon illumination
+- **Scatter Plots**: Price relationships
+- **Bar Charts**: Phase-based analysis
+- **Calendar Heatmaps**: Daily returns visualization
+
+### **Interactive Features**
+- **Intelligent Search**: 53+ stock autocomplete
+- **Date Range Selection**: Flexible time periods
+- **Parameter Configuration**: Rolling windows, thresholds
+- **Real-time Updates**: Dynamic chart updates
+
+## 🌐 **Deployment Status**
+
+| Platform | Status | URL Pattern | Features |
+|----------|--------|-------------|----------|
+| **AWS Amplify** | ✅ Ready | `https://[app-id].amplifyapp.com` | CDN, SSL, Custom domains |
+| **Render** | ✅ Ready | `https://[app-name].onrender.com` | Free tier, Auto-deploy |
+| **Heroku** | ✅ Ready | `https://[app-name].herokuapp.com` | Paid plans, Add-ons |
+| **Vercel** | ✅ Ready | `https://[app-name].vercel.app` | Serverless, Edge functions |
+| **Railway** | ✅ Ready | `https://[app-name].railway.app` | Modern platform |
+| **GitHub Pages** | ✅ Ready | `https://[user].github.io/[repo]` | Static demo only |
+
+## 🎯 **Next Steps**
+
+1. **Choose deployment platform** based on requirements
+2. **Copy appropriate configuration** from deployment folder
+3. **Set environment variables** as documented
+4. **Deploy and monitor** application performance
+5. **Configure custom domain** (optional)
+
+## 📞 **Support**
+
+- **Documentation**: See `docs/` directory
+- **Issues**: GitHub repository issues
+- **Deployment Help**: Platform-specific guides in `deployment/`

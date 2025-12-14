@@ -25,7 +25,7 @@ try:
     from .visualizations import create_comprehensive_dashboard
     from .data_validation import validate_analysis_parameters, ValidationError
     from .stock_database import stock_db
-    from .suggestions_api import suggestion_engine
+    from .suggestions_api import suggestions_api
 except ImportError:
     # Fall back to absolute imports (when run directly)
     from cache_manager import cached_stock_data, cached_moon_data, get_performance_optimizer
@@ -36,7 +36,7 @@ except ImportError:
     from visualizations import create_comprehensive_dashboard
     from data_validation import validate_analysis_parameters, ValidationError
     from stock_database import stock_db
-    from suggestions_api import suggestion_engine
+    from suggestions_api import suggestions_api
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
