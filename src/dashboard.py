@@ -92,9 +92,9 @@ app.index_string = '''
 </html>
 '''
 
-# Default coordinates (New York City)
-DEFAULT_LAT = 40.7128
-DEFAULT_LON = -74.0060
+# Default coordinates (Mumbai, India - for Indian stock analysis)
+DEFAULT_LAT = 19.0760
+DEFAULT_LON = 72.8777
 
 # Layout components
 def create_header():
@@ -129,8 +129,8 @@ def create_controls():
                             dbc.Input(
                                 id="stock-symbol",
                                 type="text",
-                                value="AAPL",
-                                placeholder="Search stocks by name or symbol...",
+                                value="TCS.NS",
+                                placeholder="Search stocks by name or symbol (e.g., TCS.NS, AAPL)...",
                                 className="text-uppercase",
                                 autoComplete="off"
                             ),
