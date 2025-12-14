@@ -163,7 +163,7 @@ def create_controls():
                         dbc.Input(
                             id="start-date",
                             type="date",
-                            value=(datetime.now() - timedelta(days=90)).strftime("%Y-%m-%d")
+                            value=(datetime.now() - timedelta(days=120)).strftime("%Y-%m-%d")
                         ),
                         dbc.InputGroupText("📅")
                     ])
@@ -174,7 +174,7 @@ def create_controls():
                         dbc.Input(
                             id="end-date",
                             type="date",
-                            value=datetime.now().strftime("%Y-%m-%d")
+                            value=(datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
                         ),
                         dbc.InputGroupText("📅")
                     ])

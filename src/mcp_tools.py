@@ -58,6 +58,12 @@ class StockDataFetcher:
             start_dt = datetime.strptime(start_date, "%Y-%m-%d")
             end_dt = datetime.strptime(end_date, "%Y-%m-%d")
             
+            # Ensure end date is not too recent (leave 3 days buffer for data availability)
+            max_end_date = datetime.now() - timedelta(days=3)
+            if end_dt > max_end_date:
+                logger.warning(f"End date {end_date} is too recent, adjusting to {max_end_date.strftime('%Y-%m-%d')}")
+                end_dt = max_end_date
+            
             start_timestamp = int(start_dt.timestamp())
             end_timestamp = int(end_dt.timestamp())
             
@@ -79,7 +85,7 @@ class StockDataFetcher:
             
             # Parse response
             if 'chart' not in data or not data['chart']['result']:
-                raise MCPToolError(f"No data found for symbol {symbol}")
+                raise MCPToolError(f"No data found for symbol {symbol}. Try using a different date range or check if the symbol is correct.")
             
             result = data['chart']['result'][0]
             timestamps = result['timestamp']
